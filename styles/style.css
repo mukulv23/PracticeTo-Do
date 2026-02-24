@@ -5,7 +5,7 @@
 }
 
 .navbar{
-    height: 40px;
+    height: 50px;
     width: 100%;
     background-color: black;
     display: flex;
@@ -21,7 +21,7 @@ a{
 .right{
     margin-left: auto;
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     padding-right: 1rem;
 }
 
