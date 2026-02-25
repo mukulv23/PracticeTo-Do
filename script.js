@@ -94,6 +94,30 @@ app.get("/todo", (req, res) => {
     res.render("todo");
 })
 
+// todo Logic //
+app.post("/addTask", (req, res) => {
+    let body = ""
+    req.on("data", (chunk) => {
+        body += chunk;
+    })
+
+    req.on("end", () => {
+        let data = qs.parse(body)
+        fs.readFile("database/tasks.json", "utf-8", (err, taskData) => {
+            let tasks = []
+            if (!err && taskData)
+                tasks = JSON.parse(taskData)
+            tasks.push(data);
+            fs.writeFile("database/tasks.json", JSON.stringify(tasks, null, 2), (err) => {
+                if (err) return res.send("<h1>Error Occured</h1>")
+                else
+                    res.redirect("/");
+            })
+        })
+    })
+})
+
+
 // Error Page //
 app.use((req, res) => {
     res.status(404).render("error");
